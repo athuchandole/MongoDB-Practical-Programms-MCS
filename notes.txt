@@ -1,0 +1,155 @@
+Q. student
+
+use student
+db.student.insert({name:"Athu",course:[{coursename:"mcs"},{coursename:"bcs"}],marks:80,age:21,gender:"male",city:"nashik"})
+db.student.insert({name:"Kalpesh",course:[{coursename:"mcs"},{coursename:"bcs"}],marks:95,age:20,gender:"male",city:"sinner"})
+db.student.insert({name:"Shijuka",course:[{coursename:"iti"},{coursename:"bcs"}],marks:40,age:18,gender:"female",city:"pune"})
+db.student.insert({name:"payal",course:[{coursename:"chemistry"},{coursename:"mcs"}],marks:81,age:19,gender:"female",city:"mumbai"})
+db.student.insert({name:"sushant",course:[{coursename:"iti"},{coursename:"bsc"}],marks:35,age:19,gender:"male",city:"sinner"})
+db.student.insert({name:"anushka",course:[{coursename:"msc"},{coursename:"bcs"}],marks:90,age:21,gender:"female",city:"pune"})
+db.student.insert({name:"aditya",course:[{coursename:"msc"},{coursename:"bcs"}],marks:50,age:21,gender:"male",city:"nashik"})
+db.student.insert({name:"Amit",course:[{coursename:"msc"},{coursename:"bcs"}],marks:50,age:21,gender:"male",city:"mumbai"})
+db.student.insert({name:"amol",course:[{coursename:"msc"},{coursename:"bcs"}],marks:35,age:21,gender:"male",city:"mumbai"})
+db.student.insert({name:"praju",course:[{coursename:"msc"},{coursename:"bcs"}],marks:39,age:21,gender:"female",city:"mumbai"})
+db.student.insert({name:"pratik",course:[{coursename:"msc"},{coursename:"bcs"}],marks:63,age:21,gender:"male",city:"mumbai"})
+
+db.student.count({marks:{$gt:80}})
+db.student.find({marks:{$lt:40}})
+var my=db.student.find({marks:{$gt:70}});
+while(my.hasNext()){print(tojson(my.next()));}
+db.student.find({gender:"female",$or:[{city:"pune"},{city:"mumbai"},{marks:{$lt:50}}]})
+
+Q products, customers, orders and invoices.
+
+use product
+db.product.insert({name:"robot",price:12000})
+db.product.insert({name:"toycar",price:2000})
+db.product.insert({name:"cricketset",price:9000})
+db.product.insert({name:"studymaterial",price:19000})
+db.order.insert({orderno:3736,custName:"arun kumar",product:{productName:"toycar",price:20000},order_date:"12/2/2019",stetus:"processed",Totalbill:2039,invoice:{invoiceNO:67564,bill:2039,date:"17/2/2019"}})
+db.order.insert({orderno:3737,custName:"arun kumar",product:{productName:"robot",price:12000},order_date:"11/3/2019",stetus:"processed",Totalbill:12800,invoice:{invoiceNO:67574,bill:12039,date:"17/3/2019"}})
+db.order.insert({orderno:3738,custName:"arun kumar",product:{productName:"cricketset",price:9000},order_date:"15/5/2019",stetus:"in process",Totalbill:9050})
+db.order.insert({orderno:3739,custName:"mukesh patil",product:{productName:"studentmaterial",price:19000},order_date:"15/8/2019",stetus:"in process",Totalbill:19080})
+
+db.product.find().pretty()
+db.order.find({Totalbill:{$lt:10000}})
+db.order.find({stetus:"in process"})
+db.order.find({custName:"arun kumar",stetus:"processed"})
+
+Q books and publishers
+
+use book
+db.book.insert({BName:"shyamchiaai",cost:500,author:"sane guruji",published:2005})
+db.book.insert({BName:"Two Saints",cost:2000,author:"raguramkrishna",published:2015})
+db.book.insert({BName:"ramkrushnaparamhans",cost:1000,author:"raguramkrishna",published:2020})
+db.book.insert({BName:"DMS",cost:100,author:"raguramkrishna",published:2007})
+db.publisher.insert({pname:"OReilly",language:"English",books:[{BName:"ramkrushnaparamhans"},{BName:"Two Saints"}],city:"mumbai"})
+db.publisher.insert({pname:"vision",language:"English",books:[{BName:"DMS"}],city:"pune"})
+db.publisher.insert({pname:"OReilly",language:"marathi",books:[{BName:"shyamchiaai"}],city:"mumbai"})
+
+db.publisher.find({city:"mumbai"})
+db.book.find({cost:{$lt:1000}})
+db.book.find({author:"raguramkrishna",published:2017})
+db.publisher.find({pname:"OReilly",$or:[{language:"English"},{language:"marathi"}]})
+
+Q Hospital information
+
+use Hospital
+db.Hospital.insert({Hno:1,Hname:"AAA",Specialization:["Pediatric","Gynaec","Orthopaedic"],People:[{Pname:"PQR",Rating:4},{Pname:"SDE",Rating:5}],Doctor:[{"Dname":"WWW","Visit":"Sunday"}]})
+db.Hospital.insert({Hno:2,Hname:"BBB",Specialization:["Gynaec","Orthopaedic"],People:[{Pname:"POP",Rating:2},{Pname:"SDE",Rating:3}],Doctor:[{"Dname":"XXX",Visit:"Monday"}]})
+db.Hospital.insert({Hno:3,Hname:"CCC",Specialization:["Gynaec","Orthopaedic","Pediatric"],People:[{Pname:"KLO",Rating:3},{Pname:"LPO",Rating:3}],Doctor:[{"Dname":"XXX","Visit":"Tuesday"}]})
+db.Hospital.insert({Hno:4,Hname:"DDD",Specialization:["bones","Gynaec","Orthopaedic"],People:[{Pname:"kunal",Rating:4},{Pname:"Rohan",Rating:5}],Doctor:[{"Dname":"WWW","Visit":"Monday"}]})
+db.Hospital.insert({Hno:5,Hname:"EEE",Specialization:["Skin","Gynaec","Orthopaedic"],People:[{Pname:"mohit",Rating:4},{Pname:"mayur",Rating:5}],Doctor:[{"Dname":"WWW","Visit":"Sunday"}]})
+db.Hospital.insert({Hno:6,Hname:"FF",Specialization:["Pediatric","Gynaec","Orthopaedic"],People:[{Pname:"sushant",Rating:4},{Pname:"Bhai",Rating:5}],Doctor:[{"Dname":"WWW","Visit":"Sunday"}]})
+db.Hospital.insert({Hno:7,Hname:"GG",Specialization:["Pediatric","Gynaec","Orthopaedic"],People:[{Pname:"hrushi",Rating:2},{Pname:"SDE",Rating:3}],Doctor:[{"Dname":"XXX",Visit:"Monday"}]})
+db.Hospital.insert({Hno:8,Hname:"HH",Specialization:["Gynaec","Orthopaedic","Pediatric"],People:[{Pname:"sahil",Rating:3},{Pname:"LPO",Rating:3}],Doctor:[{"Dname":"XXX","Visit":"Tuesday"}]})
+db.Hospital.insert({Hno:9,Hname:"II",Specialization:["bones","Gynaec","Orthopaedic"],People:[{Pname:"kunal",Rating:4},{Pname:"Rohan",Rating:3}],Doctor:[{"Dname":"WWW","Visit":"Monday"}]})
+db.Hospital.insert({Hno:10,Hname:"JJ",Specialization:["Skin","Gynaec","Orthopaedic"],People:[{Pname:"mohit",Rating:4},{Pname:"mayur",Rating:4}],Doctor:[{"Dname":"WWW","Visit":"Sunday"}]})
+
+db.Hospital.find({Specialization:"Pediatric"})
+db.Hospital.find({Hname:"CCC","Doctor.Visit":"Tuesday"})
+db.Hospital.find({Specialization:{$not:{$size:1}},"Doctor.Dname":"XXX"})
+db.Hospital.find({"People.Rating":{$gt:3},Hname:"AAA"})
+
+Q blog database
+
+use post
+db.post.insert({title:"online",url:"www.abc.com",tag:["food","travel"],pname:"mukesh",pdate:new Date("2019-03-12"),like:89,user:[{name:"abhi",comment:"good",message:"do best", cdate:new Date("2020-03-12"),like:1}]})
+db.post.insert({title:"wetpet",url:"www.wetpet.com",tag:["food","travel",],pname:"Amit",pdate:new Date("2018-03-12"),like:82,user:[{name:"abhi",comment:"good",message:"do best",time:"4pm",like:1},{name:"mukesh",comment:"best",message:"success", cdate:new Date("2008-11-12"),like:2}]})
+db.post.insert({title:"wetpet",url:"www.wetpet.com",tag:["food","travel","magic"],pname:"abhijeet",pdate:newDate("2017-03-12"),like:182,user:[{name:"sagar",comment:"like",message:"dobest",time:"4pm",like:1},{name:"mukesh",comment:"best",message:"success", cdate:new Date("2019-03-12"),like:2}]})
+db.post.insert({title:"nonveg",url:"www.non.com",tag:["food","travel","chiken"],pname:"Amit",pdate:new Date("2019-07-12"),like:82,user:[{name:"manisha",comment:"good",message:"dobest",time:"4pm",like:0},{name:"manasi",comment:"best",message:"success", cdate:new Date("2018-03-12"),like:0}]})
+
+db.post.find({tag:"food"})
+db.post.find({pname:"Amit"})
+db.post.find({tag:"travel",pdate:{"$lte":new Date("2018-03-11")},"user.name":"sagar","user.comment":"like"})
+db.post.find({$or:[{"user.cdate":{$lte:new Date("2019-08-07")}},{"user.like":0}]})
+
+Q Tours information
+
+use turisum
+db.turisum.insert({name:"veenaword",rate:9,package:[{pname:"shillong",cost:10000},{pname:"gujart",cost:7000},{pname:"karnataka",cost:6000}]})
+db.turisum.insert({name:"rohit",rate:7,package:[{pname:"shillong",cost:10000},{pname:"rujan",cost:7000}]})
+db.tour.insert({sourc:"john",destination:"shillong",toerisumName:"veenaword",tourisumrate:8000,expense:20000,year:2018,customer:[{cname:"mukesh",city:"pune"},{cname:"abhijeetsangita",city:"baramati"},{cname:"manisha",city:"15no"},{cname:"manasi",city:"latur"}]})
+db.tour.insert({sourc:"john",destination:"karnataka",toerisumName:"veenaword",tourisumrate:80090,expense:20900,year:2017,customer:[{cname:"mukesh",city:"pune"},{cname:"abhijeetsangita",city:"baramati"},{cname:"manisha",city:"15no"},{cname:"manasi",city:"latur"}]})
+db.tour.insert({sourc:"john",destination:"rajasthan",toerisumName:"rohit",tourisumrate:6000,expense:30400,year:2019,customer:[{cname:"mukesh",city:"pune"},{cname:"abhijeetsangita",city:"baramati"},{cname:"manisha",city:"15no"},{cname:"manasi",city:"latur"}]}) 
+db.tour.insert({sourc:"john",destination:"taj",toerisumName:"rohit",tourisumrate:60090,expense:10400,year:2016,customer:[{cname:"mukesh",city:"pune"},{cname:"abhijeetsangita",city:"baramati"},{cname:"manisha",city:"15no"},{cname:"manasi",city:"latur"}]})
+
+db.turisum.find({name:"veena word"}).pretty()
+db.turisum.find({}).sort({"rate":-1}).limit(1)
+db.tour.aggregate([{"$sort":{"year":1}},{"$limit":3},{$group:{_id:null,"count":{"$sum":"$expense"}}}])
+db.tour.find({destination:"shillong"})
+
+Q scientist information
+
+use scien
+db.scien.insert({fname:"mukesh",lname:"navse",BOD:new Date("1952-04-18"),DOD:"stillalive",field:["tcs","java","c","sql"],award:[{name:"turingmachine",year:1976},{name:"robotic",year:1998},{name:"code talent",year:1995}]})
+db.scien.insert({fname:"abhi",lname:"nalave",BOD:new Date("1972-04-18"),DOD:"stillalive",field:["tcs","java","sql"],award:[{name:"codemaster",year:1976},{name:"robot",year:1998},{name:"puzzletalent",year:1995}]})
+db.scien.insert({fname:"manisha",lname:"hipparkar",BOD:new Date("1942-04-18"),DOD:new Date("2009-08-06"),field:["tcs","java"],award:[{name:"topper",year:1976},{name:"puraskar",year:1998},{name:"puzzletalent",year:1995}]})
+
+db.scien.find({lname:{$regex:/n/}})
+db.scien.find({BOD:{"$gt":new Date("1950-03-11")},DOD:"still alive"})
+db.scien.aggregate([{$group:{_id:{year:"$award.year",Name:"$award.name"}}}])
+db.scien.find({"award.name":"turingmachine","award.year":{$lt:1980},field:{$size:4}})
+
+Q  quantity of the item
+
+use item
+db.item.insert({itemName:"planner",tag:["wash","food","vehicle"],status:"A",height:5,width:9,instack:15,warehouse:[{location:"pune",quntity:36},{location:"mumbai",quntity:67}]})
+db.item.insert({itemName:"toycar",tag:["food","vehicle"],status:"D",height:5,width:9,instack:15,warehouse:[{location:"pune",quntity:36},{location:"mumbai",quntity:67}]})
+db.item.insert({itemName:"roboticcar",tag:["food","vehicle"],status:"A",height:9,width:9,instack:5,warehouse:[{location:"pune",quntity:26},{location:"mumbai",quntity:17}]})
+db.item.insert({itemName:"bag",tag:["food","vehicle","school","travel"],status:"c",height:19,width:39,instack:75,warehouse:[{location:"surat",quntity:26},{location:"lanavala",quntity:17}]})
+
+db.item.find({status:"D","warehouse.quntity":{$gt:30}})
+db.item.find({"tag":{$size:3}})db.item.find({$or:[{status:"A"},{"warehouse.quntity":{$lt:30},height:{$gt:10}}]})
+db.item.find({itemName:"planner",instack:{$lt:20}})
+
+Q transaction information
+
+use transaction
+db.transaction.insert({itemName:"toy",customerName:"john",paymentmode:"debitcard",payment:8000})
+db.transaction.insert({itemName:"car",customerName:"john",paymentmode:"creditcard",payment:4000})
+db.transaction.insert({itemName:"bag",customerName:"mukesh",paymentmode:"cash",payment:5000})
+db.transaction.insert({itemName:"airlineticket",customerName:"rohit",paymentmode:"cash",payment:50090})
+db.transaction.insert({itemName:"mango",customerName:"abhijeet",paymentmode:"creditcard",payment:8000})
+db.transaction.insert({itemName:"bus",customerName:"manasi",paymentmode:"debitcard",payment:7000})
+
+db.transaction.find({customerName:"john"})
+db.transaction.find({paymentmode:"debitcard"})
+db.transaction.aggregate([{$match:{"paymentmode":"creditcard"}},{$group:{_id:null,"count":{"$sum":"$payment"}}}])
+db.transaction.aggregate([{$group:{_id:"$paymentmode","count":{"$sum":"$payment"}}}])
+
+Q Mobile Shopping
+
+use custome
+db.custome.insert({cname:"mukesh",modelname:"samsungj6",amount:20000})
+db.custome.insert({cname:"abhijeet",modelname:"samsungj6",amount:20060})
+db.custome.insert({cname:"manasi",modelname:"iphone7+",amount:30060})
+db.custome.insert({cname:"manisha",modelname:"iphone7+",amount:30070})
+db.custome.insert({cname:"dipak",modelname:"iphone7+",amount:30800})
+db.shopping.insert({brandname:"samsung",rate:6,model:[{mname:"s40",ram:"3GB",rom:"32GB",rate:4},{mname:"j6",ram:"4GB",rom:"32GB",rate:7},{mname:"j7",ram:"6GB",rom:"64GB",rate:6}]})
+db.shopping.insert({brandname:"vivo",rate:8,model:[{mname:"Y55",ram:"3GB",rom:"32GB",rate:6},{mname:"Ys5",ram:"4GB",rom:"32GB",rate:4},{mname:"YYY",ram:"6GB",rom:"64GB",rate:6}]})
+
+db.shopping.find({"model.ram":"3GB","model.rom":"32GB"})
+db.custome.find({modelname:"samsung j6"})
+db.shopping.aggregate([{"$sort":{"rate":-1}},{"$limit":1},{$group:{_id:"$brandname"}}])
+db.custome.find().sort({"cname":1})
